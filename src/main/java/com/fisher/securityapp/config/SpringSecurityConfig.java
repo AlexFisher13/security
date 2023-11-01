@@ -28,7 +28,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // страницы входа, страницы после успеха и неудачи
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests() // настраиваем авторизацию (т.е. доступы)
-                .antMatchers("/auth/login", "/error").permitAll() // эти страницы доступны всем
+                .antMatchers("/auth/login", "/auth/registration", "/error")
+                .permitAll() // эти страницы доступны всем
                 .anyRequest().authenticated() // для других запросов юзер должен аутентифицироваться
                 .and()
                 .formLogin().loginPage("/auth/login") // на какую страницу вести неавторизованных
