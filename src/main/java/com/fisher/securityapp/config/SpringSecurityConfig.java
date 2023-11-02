@@ -25,7 +25,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     // Конфигурируем работу с http запросами, а именно
     // авторизацию (т.е. какие страницы доступны)
-    // страницы входа, страницы после успеха и неудачи
+    // страницы входа/выхода, страницы успеха/неудачи
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests() // настраиваем авторизацию (т.е. доступы)
                 .antMatchers("/auth/login", "/auth/registration", "/error")
@@ -35,7 +35,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/auth/login") // на какую страницу вести неавторизованных
                 .loginProcessingUrl("/process_login") // адрес того куда отправлять данные с формы
                 .defaultSuccessUrl("/hello", true) // страница после удачной аутентификации
-                .failureUrl("/auth/login?error"); // страница после не удачной аутентификации
+                .failureUrl("/auth/login?error") // страница после не удачной аутентификации
+                .and()
+                .logout()
+                .logoutUrl("/logout") // адрес для выхода
+                .logoutSuccessUrl("/auth/login"); // куда перекидывать после выхода
     }
 
     @Bean
