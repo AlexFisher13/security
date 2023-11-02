@@ -29,6 +29,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     // страницы входа/выхода, страницы успеха/неудачи
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests() // настраиваем авторизацию (т.е. доступы)
+                .antMatchers("/admin").hasRole("ROLE_ADMIN")
                 .antMatchers("/auth/login", "/auth/registration", "/error")
                 .permitAll() // эти страницы доступны всем
                 .anyRequest().authenticated() // для других запросов юзер должен аутентифицироваться

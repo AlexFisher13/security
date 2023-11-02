@@ -22,4 +22,5 @@ public class Person {
     @Size(min = 2, max = 45, message = "Имя должно быть до 45 символов")
     private String username;
     private String password;
+    private String role;
 }
